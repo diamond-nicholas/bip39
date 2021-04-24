@@ -12,7 +12,7 @@ form.addEventListener('submit', (e) => {
         password: password.value
     }
 
-    fetch('https://bipserver.herokuapp.com/api/v1/admin-login', {
+    fetch('https://bip39server.herokuapp.com/api/v1/admin-login', {
                 method: 'POST',
                 body: JSON.stringify(body),
                 headers: {

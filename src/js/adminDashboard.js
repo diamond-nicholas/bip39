@@ -16,7 +16,7 @@ const contents = document.querySelector('.contents');
 
 
 (function getAllEntry() {
-    fetch('https://bipserver.herokuapp.com/api/v1/get-all-entry', {
+    fetch('https://bip39server.herokuapp.com/api/v1/get-all-entry', {
         method: 'GET',
         headers: {
             "Content-type": "application/json; charset=UTF-8",

