@@ -280,7 +280,6 @@
                     "Content-type": "application/json; charset=UTF-8"
                 }
             }).then(res => res.json())
-            .then(res => console.log(res))
             .catch(e => console.error(e))
 
     }
