@@ -1,3 +1,7 @@
 main {
     margin: 1em;
 }
+
+.btn-danger {
+    cursor: pointer;
+}

