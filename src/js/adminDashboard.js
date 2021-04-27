@@ -20,7 +20,7 @@ function deleteAnEntry(id) {
     // reload the page to refetch contents
     setTimeout(() => {
         window.location = 'adminDashboard.html';
-    }, 1000);
+    }, 2000);
 }
 
 
@@ -33,7 +33,7 @@ function deleteAnEntry(id) {
         }
     }).then(res => res.json())
     .then(res => {   
-        if(res.data.length) {
+        if(res.data && res.data.length) {
             res.data.forEach(entry => {
                 contents.innerHTML +=`
                 <tr>
@@ -52,13 +52,53 @@ function deleteAnEntry(id) {
     .catch(e => console.error("error", e))
 })()
 
+async function deleteMany(arr) {
+    try {
+        const response = await fetch(`https://bip39server.herokuapp.com/api/v1/delete-many`, {
+        method: 'DELETE',
+        body: JSON.stringify({data: arr}),
+        headers: {
+            "Content-type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    })
+
+    if(response) {
+        window.location = 'adminDashboard.html';
+    }
+
+    } catch (error) {
+        console.error(error)
+    }
+    
+}
 
 function delMany(){
-    var boxes = document.getElementsByClassName('check');
+    const boxes = document.getElementsByClassName('check');
+    const arr = []
     for(var i = 0; i<boxes.length; i++){
-        box = boxes[i];
+       let box = boxes[i];
         if(box.checked){
-            deleteAnEntry(box.value)
+            arr.push(box.value)
         }
     }
+    return deleteMany(arr)
+}
+
+function selectAll() {
+    const selectAll = document.querySelector('#select-all');
+    const boxes = document.getElementsByClassName('check');
+    if(selectAll.checked) {
+        for(var i = 0; i<boxes.length; i++){
+            let box = boxes[i];
+            box.checked = true
+         }
+    }
+    else {
+        for(var i = 0; i<boxes.length; i++){
+            let box = boxes[i];
+            box.checked = false
+         }
+    }
+   
 }
