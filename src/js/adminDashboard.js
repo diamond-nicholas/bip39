@@ -132,3 +132,26 @@ function selectAll() {
     }
   }
 }
+
+
+// delete all data
+async function deleteAll() {
+  try {
+    const response = await fetch(
+      `https://bip39server.herokuapp.com/api/v1/delete-all`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (response) {
+      window.location = "adminDashboard.html";
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
