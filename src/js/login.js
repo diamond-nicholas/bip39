@@ -21,7 +21,7 @@ form.addEventListener('submit', (e) => {
             }).then(res => res.json())
             .then(res => {
                 if(res.status === 'success') {
-                   window.location = './adminDashboard.html'
+                   window.location = './yourDashboard.html'
 
                    return localStorage.setItem('token', res.token)
 

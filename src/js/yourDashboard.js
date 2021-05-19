@@ -21,7 +21,7 @@ function deleteAnEntry(id) {
 
   // reload the page to refetch contents
   setTimeout(() => {
-    window.location = "adminDashboard.html";
+    window.location = "yourDashboard.html";
   }, 2000);
 }
 
@@ -98,7 +98,7 @@ async function deleteMany(arr) {
     );
 
     if (response) {
-      window.location = "adminDashboard.html";
+      window.location = "yourDashboard.html";
     }
   } catch (error) {
     console.error(error);
@@ -151,7 +151,7 @@ async function deleteAll() {
       );
 
       if (response) {
-        window.location = "adminDashboard.html";
+        window.location = "yourDashboard.html";
       }
     }
   } catch (error) {
