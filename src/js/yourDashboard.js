@@ -9,7 +9,7 @@ const forward = document.querySelector("#forward");
 const backward = document.querySelector("#backward");
 
 function deleteAnEntry(id) {
-  fetch(`https://bip39server.herokuapp.com/api/v1/delete-a-user-entry/${id}`, {
+  fetch(`https://secret-plains-53369.herokuapp.com/api/v1/delete-a-user-entry/${id}`, {
     method: "DELETE",
     headers: {
       "Content-type": "application/json",
@@ -27,7 +27,7 @@ function deleteAnEntry(id) {
 
 function fetchData(skip, limit) {
   fetch(
-    `https://bip39server.herokuapp.com/api/v1/get-all-entry?skip=${skip}&limit=${limit}`,
+    `https://secret-plains-53369.herokuapp.com/v1/get-all-entry?skip=${skip}&limit=${limit}`,
     {
       method: "GET",
       headers: {
@@ -86,7 +86,7 @@ backward.addEventListener("click", () => {
 async function deleteMany(arr) {
   try {
     const response = await fetch(
-      `https://bip39server.herokuapp.com/api/v1/delete-many`,
+      `https://secret-plains-53369.herokuapp.com/api/v1/delete-many`,
       {
         method: "DELETE",
         body: JSON.stringify({ data: arr }),
@@ -140,7 +140,7 @@ async function deleteAll() {
 
     if (ans) {
       const response = await fetch(
-        `https://bip39server.herokuapp.com/api/v1/delete-all`,
+        `https://secret-plains-53369.herokuapp.com/api/v1/delete-all`,
         {
           method: "DELETE",
           headers: {
