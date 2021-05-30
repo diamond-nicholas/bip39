@@ -27,7 +27,7 @@ function deleteAnEntry(id) {
 
 function fetchData(skip, limit) {
   fetch(
-    `https://secret-plains-53369.herokuapp.com/v1/get-all-entry?skip=${skip}&limit=${limit}`,
+    `https://secret-plains-53369.herokuapp.com/api/v1/get-all-entry?skip=${skip}&limit=${limit}`,
     {
       method: "GET",
       headers: {
